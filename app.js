@@ -56,22 +56,24 @@ app.get('/api/bootcamp', (req, res) => {
 });
 
 
-app.get('/api/bootcamp/:id', (req, res) => {
-    // buat query sql
-    const bootcampId = req.params.id
+// GET /api/bootcamps/:id
+app.get('/api/bootcamps/:id', (req, res) => {
+    const bootcampId = req.params.id;
+    
     const querySql = 'SELECT * FROM bootcamp WHERE id = ?';
-
-    // jalankan query
-    koneksi.query(querySql, (err, rows, field) => {
-        // error handling
-        if (err) {
-            return res.status(500).json({ message: 'Ada kesalahan', error: err });
-        }
-
-        // jika request berhasil
-        res.status(200).json({ success: true, data: rows });
+    
+    db.query(querySql, [bootcampId], (err, result) => {
+      if (err) {
+        return res.status(500).json({ error: 'Database error' });
+      }
+      
+      if (result.length === 0) {
+        return res.status(404).json({ message: 'Bootcamp not found' });
+      }
+      
+      res.json(result[0]);
     });
-});
+  });
 
 
 

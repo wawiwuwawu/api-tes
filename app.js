@@ -57,7 +57,7 @@ app.get('/api/bootcamp', (req, res) => {
 
 
 // GET /api/bootcamps/:id
-app.get('/api/bootcamps/:id', (req, res) => {
+app.get('/api/bootcamp/:id', (req, res) => {
     const data = { ...req.body };
     
     const querySql = 'SELECT * FROM bootcamp WHERE id = ?';

@@ -58,6 +58,7 @@ app.get('/api/bootcamp', (req, res) => {
 
 app.get('/api/bootcamp/:id', (req, res) => {
     // buat query sql
+    const bootcampId = req.params.id
     const querySql = 'SELECT * FROM bootcamp WHERE id = ?';
 
     // jalankan query

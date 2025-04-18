@@ -58,11 +58,11 @@ app.get('/api/bootcamp', (req, res) => {
 
 // GET /api/bootcamps/:id
 app.get('/api/bootcamps/:id', (req, res) => {
-    const bootcampId = req.params.id;
+    const data = { ...req.body };
     
     const querySql = 'SELECT * FROM bootcamp WHERE id = ?';
     
-    db.query(querySql, [bootcampId], (err, result) => {
+    koneksi.query(querySearch, req.params.id, (err, rows, field) => {
       if (err) {
         return res.status(500).json({ error: 'Database error' });
       }

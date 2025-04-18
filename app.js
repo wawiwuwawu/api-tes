@@ -13,6 +13,8 @@ app.listen(PORT, () => console.log(`Server running at port: ${PORT}`));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+
+
 // create data / insert data
 app.post('/api/bootcamp', (req, res) => {
     // buat variabel penampung data dan query sql
@@ -35,6 +37,7 @@ app.post('/api/bootcamp', (req, res) => {
 app.listen(PORT, () => console.log(`Server running at port: ${PORT}`));
 
 
+
 // read data / get data
 app.get('/api/bootcamp', (req, res) => {
     // buat query sql
@@ -51,6 +54,24 @@ app.get('/api/bootcamp', (req, res) => {
         res.status(200).json({ success: true, data: rows });
     });
 });
+
+
+app.get('/api/bootcamp:id', (req, res) => {
+    // buat query sql
+    const querySql = 'SELECT * FROM bootcamp';
+
+    // jalankan query
+    koneksi.query(querySql, (err, rows, field) => {
+        // error handling
+        if (err) {
+            return res.status(500).json({ message: 'Ada kesalahan', error: err });
+        }
+
+        // jika request berhasil
+        res.status(200).json({ success: true, data: rows });
+    });
+});
+
 
 
 

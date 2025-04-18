@@ -1,7 +1,7 @@
 const mysql = require('mysql2');
 // buat konfigurasi koneksi
 const koneksi = mysql.createConnection({
-    host: '192.168.0.131',
+    host: 'localhost',
     port: '3306',
     user: 'root',
     password: 'dedeari123',
